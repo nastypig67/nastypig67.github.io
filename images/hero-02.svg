@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" width="600" height="440" role="img" aria-label="HERO_02 placeholder">
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#a06bff" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a06bff" stop-opacity="0.16"/>
+      <stop offset="0.55" stop-color="#a06bff" stop-opacity="0.03"/>
+      <stop offset="1" stop-color="#a06bff" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="440" fill="#0a0e14"/>
+  <rect width="600" height="440" fill="url(#grid)"/>
+  <rect width="600" height="440" fill="url(#glow)"/>
+
+  <!-- frame -->
+  <rect x="10.5" y="10.5" width="579" height="419" fill="none" stroke="#a06bff" stroke-opacity="0.42" stroke-width="1"/>
+
+  <!-- corner ticks -->
+  <g stroke="#a06bff" stroke-opacity="0.95" stroke-width="2" fill="none">
+    <path d="M10 36V10h26"/>
+    <path d="M564 10H590v26"/>
+    <path d="M10 404V430h26"/>
+    <path d="M564 430H590v-26"/>
+  </g>
+
+  <!-- label -->
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" text-anchor="middle">
+    <text x="300" y="220" font-size="37" font-weight="700" fill="#a06bff" letter-spacing="3">HERO_02</text>
+    <text x="300" y="266" font-size="15" fill="#6b7f8d" letter-spacing="2">replace me</text>
+    <text x="300" y="297" font-size="15" fill="#a06bff" fill-opacity="0.45" letter-spacing="1">600 x 440</text>
+  </g>
+
+  <!-- scanline hint -->
+  <g stroke="#a06bff" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0 96H600"/><path d="M0 220H600"/><path d="M0 343H600"/>
+  </g>
+</svg>

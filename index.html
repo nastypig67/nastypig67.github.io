@@ -1,3 +1,463 @@
-Who is the Greatest footballer of all time?
-Pele
-He will be remembered as the greatest.
+<!doctype html>
+<html lang="en" data-section="home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ================================================================
+     EDIT ME: SITE TITLE + DESCRIPTION
+     These show in the browser tab and in link previews.
+     ================================================================ -->
+<title>Eddie Kong</title>
+<meta name="description" content="The personal site of Eddie Kong — facts, photos, opinions, my dog, and what I'm up to lately.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eddie Kong">
+<meta property="og:description" content="Facts, photos, opinions, my dog, and what I'm up to lately.">
+<meta property="og:url" content="https://eddiekong.com/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#05070b">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2305070b'/><text x='50' y='72' font-size='64' font-family='monospace' fill='%23a06bff' text-anchor='middle'>%3E_</text></svg>">
+<link rel="stylesheet" href="css/styles.css">
+
+<!-- Marks that JS is available. Without it every section simply stacks
+     into one long scrollable page instead of disappearing. -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body>
+
+<div class="bg-drift" aria-hidden="true"></div>
+<canvas id="net" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Boot sequence. Runs once per browser session, skippable, and is
+     never shown at all when the visitor prefers reduced motion. -->
+<div class="boot" id="boot" hidden>
+  <pre class="boot-log" id="boot-log" aria-hidden="true"></pre>
+  <p class="boot-hint">[ click or press any key to skip ]</p>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <!-- ============ EDIT ME: YOUR NAME (terminal prompt, top-left) ============ -->
+    <a class="brand" href="#home">
+      <span class="brand-user">eddiekong</span><span class="brand-at">@</span><span class="brand-host">web</span><span class="brand-path">:~$</span>
+      <span class="caret" aria-hidden="true"></span>
+    </a>
+
+    <nav class="tabs" aria-label="Sections">
+      <a class="tab" href="#home">home</a>
+      <a class="tab" href="#facts">facts</a>
+      <a class="tab" href="#photos">photos</a>
+      <a class="tab" href="#opinions">opinions</a>
+      <a class="tab" href="#dog">dog</a>
+      <a class="tab" href="#updates">updates</a>
+      <a class="tab" href="#contact">contact</a>
+      <span class="tab-glider" aria-hidden="true"></span>
+    </nav>
+
+    <button class="kbd-hint" type="button" id="palette-open">⌘K</button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ==================================================================
+     HOME
+     ================================================================== -->
+<section id="home" class="view" aria-labelledby="home-title">
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="prompt reveal" style="--i:0">
+        <span class="p-path">~</span><span class="p-sym">$</span><span class="p-cmd typed">whoami</span><span class="caret" aria-hidden="true"></span>
+      </p>
+
+      <!-- ============ EDIT ME: NAME + INTRO ============ -->
+      <h1 id="home-title" class="display reveal" style="--i:1">
+        <span class="display-line scramble">Eddie</span>
+        <span class="hl scramble">Kong</span>
+      </h1>
+      <p class="lede typed reveal" style="--i:2">
+        Replace this line with a one-sentence description of yourself.
+      </p>
+      <p class="sub reveal" style="--i:3">
+        And this one with a little more detail. A couple of sentences about who you
+        are, what you spend your time on, and why someone landing here should stick
+        around and try the tabs up top.
+      </p>
+      <!-- ============ /EDIT ============ -->
+
+      <div class="cta-row reveal" style="--i:4">
+        <a class="btn btn-primary" href="#facts">cat facts.txt</a>
+        <a class="btn" href="#photos">open gallery</a>
+        <a class="btn" href="#dog">./good-boy</a>
+      </div>
+    </div>
+
+    <!-- Floating photo collage. Swap the src of each hero-XX.svg for your own. -->
+    <div class="collage" aria-hidden="true">
+      <img class="collage-img c1" src="images/hero-01.svg" alt="" width="520" height="660">
+      <img class="collage-img c2" src="images/hero-02.svg" alt="" width="600" height="440">
+      <img class="collage-img c3" src="images/hero-03.svg" alt="" width="460" height="580">
+      <img class="collage-img c4" src="images/hero-04.svg" alt="" width="560" height="420">
+      <img class="collage-img c5" src="images/hero-05.svg" alt="" width="440" height="560">
+    </div>
+  </div>
+
+  <div class="marquee reveal" style="--i:5" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- ============ EDIT ME: SCROLLING WORDS ============ -->
+      <span>things I like</span><span>::</span><span>my dog</span><span>::</span>
+      <span>strong opinions</span><span>::</span><span>photos</span><span>::</span>
+      <span>replace these words</span><span>::</span>
+      <span>things I like</span><span>::</span><span>my dog</span><span>::</span>
+      <span>strong opinions</span><span>::</span><span>photos</span><span>::</span>
+      <span>replace these words</span><span>::</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================================================================
+     FACTS — 12 tiles
+     ================================================================== -->
+<section id="facts" class="view" aria-labelledby="facts-title" hidden>
+  <div class="section-head">
+    <p class="prompt reveal" style="--i:0">
+      <span class="p-path">~/facts</span><span class="p-sym">$</span><span class="p-cmd typed">cat about.txt</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <h2 id="facts-title" class="section-title reveal" style="--i:1">Facts about <span class="hl scramble">me</span></h2>
+    <p class="section-lede reveal" style="--i:2">
+      Replace this intro line, then fill in the twelve tiles below with true things about you.
+    </p>
+  </div>
+
+  <div class="with-side">
+    <ul class="fact-grid">
+      <!-- ============ EDIT ME: FACTS ============
+           Each <li> is one tile. Delete any you don't want, or copy one to
+           add more — the grid reflows on its own. Keep the numbers tidy.
+      -->
+      <li class="fact panel reveal" style="--i:0"><span class="fact-num">01</span><p>Replace this with a fact about you.</p></li>
+      <li class="fact panel reveal" style="--i:1"><span class="fact-num">02</span><p>Where you're from, and where you live now.</p></li>
+      <li class="fact panel reveal" style="--i:2"><span class="fact-num">03</span><p>What you do all day — work, school, or otherwise.</p></li>
+      <li class="fact panel reveal" style="--i:3"><span class="fact-num">04</span><p>A hobby you'd talk about for an hour unprompted.</p></li>
+      <li class="fact panel reveal" style="--i:4"><span class="fact-num">05</span><p>Something you're weirdly good at.</p></li>
+      <li class="fact panel reveal" style="--i:5"><span class="fact-num">06</span><p>Something you're genuinely bad at.</p></li>
+      <li class="fact panel reveal" style="--i:6"><span class="fact-num">07</span><p>Your go-to food order.</p></li>
+      <li class="fact panel reveal" style="--i:7"><span class="fact-num">08</span><p>A place you've been that changed your mind about something.</p></li>
+      <li class="fact panel reveal" style="--i:8"><span class="fact-num">09</span><p>The last thing you got obsessed with.</p></li>
+      <li class="fact panel reveal" style="--i:9"><span class="fact-num">10</span><p>A song, film, or book you recommend to everyone.</p></li>
+      <li class="fact panel reveal" style="--i:10"><span class="fact-num">11</span><p>Something most people don't guess about you.</p></li>
+      <li class="fact panel reveal" style="--i:11"><span class="fact-num">12</span><p>One thing you want to do before the year is out.</p></li>
+      <!-- ============ /EDIT ============ -->
+    </ul>
+
+    <aside class="side-photo" aria-hidden="true">
+      <img src="images/side-01.svg" alt="" width="520" height="680" loading="lazy">
+    </aside>
+  </div>
+</section>
+
+
+<!-- ==================================================================
+     PHOTOS — 15 images
+     ================================================================== -->
+<section id="photos" class="view" aria-labelledby="photos-title" hidden>
+  <div class="section-head">
+    <p class="prompt reveal" style="--i:0">
+      <span class="p-path">~/photos</span><span class="p-sym">$</span><span class="p-cmd typed">ls -la ./gallery</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <h2 id="photos-title" class="section-title reveal" style="--i:1">Photos of <span class="hl scramble">me</span></h2>
+    <p class="section-lede reveal" style="--i:2">
+      Click any photo to open it full size. Replace the intro line here with your own.
+    </p>
+  </div>
+
+  <!-- ============ EDIT ME: GALLERY ============
+       To use a real photo: put the file in images/ and change BOTH the
+       src on the <img> and the data-full on the <button> to match
+       (e.g. images/photo-01.jpg). Then update the caption and data-meta.
+       See images/README.md for the full walkthrough.
+  -->
+  <div class="gallery">
+    <figure class="shot reveal" style="--i:0"><button class="shot-btn" type="button" data-full="images/photo-01.svg" data-meta="IMG_01 · 800×1000" data-caption="Caption 01 — replace me"><img src="images/photo-01.svg" alt="Photo 1 — replace with a description of the picture" width="800" height="1000" loading="lazy"></button><figcaption>Caption 01 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:1"><button class="shot-btn" type="button" data-full="images/photo-02.svg" data-meta="IMG_02 · 900×640" data-caption="Caption 02 — replace me"><img src="images/photo-02.svg" alt="Photo 2 — replace with a description of the picture" width="900" height="640" loading="lazy"></button><figcaption>Caption 02 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:2"><button class="shot-btn" type="button" data-full="images/photo-03.svg" data-meta="IMG_03 · 760×980" data-caption="Caption 03 — replace me"><img src="images/photo-03.svg" alt="Photo 3 — replace with a description of the picture" width="760" height="980" loading="lazy"></button><figcaption>Caption 03 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:3"><button class="shot-btn" type="button" data-full="images/photo-04.svg" data-meta="IMG_04 · 880×680" data-caption="Caption 04 — replace me"><img src="images/photo-04.svg" alt="Photo 4 — replace with a description of the picture" width="880" height="680" loading="lazy"></button><figcaption>Caption 04 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:4"><button class="shot-btn" type="button" data-full="images/photo-05.svg" data-meta="IMG_05 · 820×1040" data-caption="Caption 05 — replace me"><img src="images/photo-05.svg" alt="Photo 5 — replace with a description of the picture" width="820" height="1040" loading="lazy"></button><figcaption>Caption 05 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:5"><button class="shot-btn" type="button" data-full="images/photo-06.svg" data-meta="IMG_06 · 960×720" data-caption="Caption 06 — replace me"><img src="images/photo-06.svg" alt="Photo 6 — replace with a description of the picture" width="960" height="720" loading="lazy"></button><figcaption>Caption 06 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:6"><button class="shot-btn" type="button" data-full="images/photo-07.svg" data-meta="IMG_07 · 780×960" data-caption="Caption 07 — replace me"><img src="images/photo-07.svg" alt="Photo 7 — replace with a description of the picture" width="780" height="960" loading="lazy"></button><figcaption>Caption 07 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:7"><button class="shot-btn" type="button" data-full="images/photo-08.svg" data-meta="IMG_08 · 900×900" data-caption="Caption 08 — replace me"><img src="images/photo-08.svg" alt="Photo 8 — replace with a description of the picture" width="900" height="900" loading="lazy"></button><figcaption>Caption 08 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:8"><button class="shot-btn" type="button" data-full="images/photo-09.svg" data-meta="IMG_09 · 840×620" data-caption="Caption 09 — replace me"><img src="images/photo-09.svg" alt="Photo 9 — replace with a description of the picture" width="840" height="620" loading="lazy"></button><figcaption>Caption 09 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:9"><button class="shot-btn" type="button" data-full="images/photo-10.svg" data-meta="IMG_10 · 800×1020" data-caption="Caption 10 — replace me"><img src="images/photo-10.svg" alt="Photo 10 — replace with a description of the picture" width="800" height="1020" loading="lazy"></button><figcaption>Caption 10 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:10"><button class="shot-btn" type="button" data-full="images/photo-11.svg" data-meta="IMG_11 · 920×700" data-caption="Caption 11 — replace me"><img src="images/photo-11.svg" alt="Photo 11 — replace with a description of the picture" width="920" height="700" loading="lazy"></button><figcaption>Caption 11 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:11"><button class="shot-btn" type="button" data-full="images/photo-12.svg" data-meta="IMG_12 · 760×940" data-caption="Caption 12 — replace me"><img src="images/photo-12.svg" alt="Photo 12 — replace with a description of the picture" width="760" height="940" loading="lazy"></button><figcaption>Caption 12 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:12"><button class="shot-btn" type="button" data-full="images/photo-13.svg" data-meta="IMG_13 · 880×880" data-caption="Caption 13 — replace me"><img src="images/photo-13.svg" alt="Photo 13 — replace with a description of the picture" width="880" height="880" loading="lazy"></button><figcaption>Caption 13 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:13"><button class="shot-btn" type="button" data-full="images/photo-14.svg" data-meta="IMG_14 · 940×660" data-caption="Caption 14 — replace me"><img src="images/photo-14.svg" alt="Photo 14 — replace with a description of the picture" width="940" height="660" loading="lazy"></button><figcaption>Caption 14 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:14"><button class="shot-btn" type="button" data-full="images/photo-15.svg" data-meta="IMG_15 · 800×1000" data-caption="Caption 15 — replace me"><img src="images/photo-15.svg" alt="Photo 15 — replace with a description of the picture" width="800" height="1000" loading="lazy"></button><figcaption>Caption 15 — replace me</figcaption></figure>
+  </div>
+  <!-- ============ /EDIT ============ -->
+</section>
+
+
+<!-- ==================================================================
+     OPINIONS — 10 hot takes
+     ================================================================== -->
+<section id="opinions" class="view" aria-labelledby="opinions-title" hidden>
+  <div class="section-head">
+    <p class="prompt reveal" style="--i:0">
+      <span class="p-path">~/opinions</span><span class="p-sym">$</span><span class="p-cmd typed">cat takes.md</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <h2 id="opinions-title" class="section-title reveal" style="--i:1">My <span class="hl scramble">opinions</span></h2>
+    <p class="section-lede reveal" style="--i:2">
+      Ten things I believe. Replace this intro, then swap in your own takes below.
+    </p>
+  </div>
+
+  <div class="with-side">
+    <ol class="takes">
+      <!-- ============ EDIT ME: HOT TAKES ============
+           <h3> is the punchy one-liner. The <p> underneath is your reasoning —
+           delete the <p> if a take speaks for itself.
+      -->
+      <li class="take panel reveal" style="--i:0"><span class="take-num">take_01</span><div><h3>Your first hot take goes here.</h3><p>And the reasoning behind it — a sentence or two on why you think this.</p></div></li>
+      <li class="take panel reveal" style="--i:1"><span class="take-num">take_02</span><div><h3>The second one, ideally slightly controversial.</h3><p>Why you'll die on this hill.</p></div></li>
+      <li class="take panel reveal" style="--i:2"><span class="take-num">take_03</span><div><h3>An opinion about food.</h3><p>Everyone has one of these. Make yours count.</p></div></li>
+      <li class="take panel reveal" style="--i:3"><span class="take-num">take_04</span><div><h3>An opinion about technology or the internet.</h3><p>What everyone gets wrong about it.</p></div></li>
+      <li class="take panel reveal" style="--i:4"><span class="take-num">take_05</span><div><h3>An opinion about music, film, or books.</h3><p>Back it up here.</p></div></li>
+      <li class="take panel reveal" style="--i:5"><span class="take-num">take_06</span><div><h3>Something you've changed your mind about.</h3><p>What you used to think, and what moved you.</p></div></li>
+      <li class="take panel reveal" style="--i:6"><span class="take-num">take_07</span><div><h3>An opinion about how people should behave.</h3><p>The small thing that would make everything better.</p></div></li>
+      <li class="take panel reveal" style="--i:7"><span class="take-num">take_08</span><div><h3>An underrated thing that deserves more credit.</h3><p>Make the case.</p></div></li>
+      <li class="take panel reveal" style="--i:8"><span class="take-num">take_09</span><div><h3>An overrated thing that gets too much credit.</h3><p>Be brave.</p></div></li>
+      <li class="take panel reveal" style="--i:9"><span class="take-num">take_10</span><div><h3>The one you'd lead with at a party.</h3><p>Save the best for last.</p></div></li>
+      <!-- ============ /EDIT ============ -->
+    </ol>
+
+    <aside class="side-photo" aria-hidden="true">
+      <img src="images/side-02.svg" alt="" width="520" height="680" loading="lazy">
+    </aside>
+  </div>
+</section>
+
+
+<!-- ==================================================================
+     MY DOG
+     ================================================================== -->
+<section id="dog" class="view" aria-labelledby="dog-title" hidden>
+  <div class="section-head">
+    <p class="prompt reveal" style="--i:0">
+      <span class="p-path">~/dog</span><span class="p-sym">$</span><span class="p-cmd typed">./good-boy --status</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <h2 id="dog-title" class="section-title reveal" style="--i:1">My <span class="hl scramble">dog</span></h2>
+    <!-- ============ EDIT ME: DOG INTRO ============ -->
+    <p class="section-lede reveal" style="--i:2">
+      Replace this with your dog's story — how you got them, what they're like,
+      and the one thing they do that nobody would believe.
+    </p>
+  </div>
+
+  <div class="dog-card panel reveal" style="--i:3">
+    <!-- ============ EDIT ME: DOG STATS ============ -->
+    <dl class="stat-strip">
+      <div class="stat"><dt>name</dt><span class="leader" aria-hidden="true"></span><dd>Their name</dd></div>
+      <div class="stat"><dt>breed</dt><span class="leader" aria-hidden="true"></span><dd>Their breed</dd></div>
+      <div class="stat"><dt>age</dt><span class="leader" aria-hidden="true"></span><dd>0 years</dd></div>
+      <div class="stat"><dt>favourite snack</dt><span class="leader" aria-hidden="true"></span><dd>Something illegal</dd></div>
+    </dl>
+    <p class="dog-note">
+      One more paragraph here if you want it — a favourite walk, a bad habit,
+      the reason for the name. Otherwise delete this line.
+    </p>
+    <!-- ============ /EDIT ============ -->
+  </div>
+
+  <!-- ============ EDIT ME: DOG PHOTOS ============ -->
+  <div class="dog-strip">
+    <figure class="shot reveal" style="--i:0"><button class="shot-btn" type="button" data-full="images/dog-01.svg" data-meta="DOG_01 · 900×700" data-caption="Dog caption 01 — replace me"><img src="images/dog-01.svg" alt="My dog, photo 1 — replace with a description" width="900" height="700" loading="lazy"></button><figcaption>Dog caption 01 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:1"><button class="shot-btn" type="button" data-full="images/dog-02.svg" data-meta="DOG_02 · 720×900" data-caption="Dog caption 02 — replace me"><img src="images/dog-02.svg" alt="My dog, photo 2 — replace with a description" width="720" height="900" loading="lazy"></button><figcaption>Dog caption 02 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:2"><button class="shot-btn" type="button" data-full="images/dog-03.svg" data-meta="DOG_03 · 880×660" data-caption="Dog caption 03 — replace me"><img src="images/dog-03.svg" alt="My dog, photo 3 — replace with a description" width="880" height="660" loading="lazy"></button><figcaption>Dog caption 03 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:3"><button class="shot-btn" type="button" data-full="images/dog-04.svg" data-meta="DOG_04 · 760×940" data-caption="Dog caption 04 — replace me"><img src="images/dog-04.svg" alt="My dog, photo 4 — replace with a description" width="760" height="940" loading="lazy"></button><figcaption>Dog caption 04 — replace me</figcaption></figure>
+    <figure class="shot reveal" style="--i:4"><button class="shot-btn" type="button" data-full="images/dog-05.svg" data-meta="DOG_05 · 900×720" data-caption="Dog caption 05 — replace me"><img src="images/dog-05.svg" alt="My dog, photo 5 — replace with a description" width="900" height="720" loading="lazy"></button><figcaption>Dog caption 05 — replace me</figcaption></figure>
+  </div>
+  <!-- ============ /EDIT ============ -->
+</section>
+
+
+<!-- ==================================================================
+     LIFE UPDATES — 4 timeline entries, newest first
+     ================================================================== -->
+<section id="updates" class="view" aria-labelledby="updates-title" hidden>
+  <div class="section-head">
+    <p class="prompt reveal" style="--i:0">
+      <span class="p-path">~/updates</span><span class="p-sym">$</span><span class="p-cmd typed">tail -f life.log</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <h2 id="updates-title" class="section-title reveal" style="--i:1">Life <span class="hl scramble">updates</span></h2>
+    <p class="section-lede reveal" style="--i:2">
+      What I'm up to lately, newest first. <em>Last updated: replace this date.</em>
+    </p>
+  </div>
+
+  <div class="with-side">
+    <ol class="timeline">
+      <!-- ============ EDIT ME: LIFE UPDATES ============
+           Newest goes at the TOP. To post a new update, copy the first <li>,
+           paste it above the others, and change the date, title and text.
+      -->
+      <li class="entry reveal" style="--i:0">
+        <div class="entry-date">MONTH YEAR</div>
+        <div class="entry-body panel">
+          <h3>The most recent thing that happened</h3>
+          <p>A few sentences on what's going on right now — a move, a job, a trip, a project, a new obsession.</p>
+        </div>
+      </li>
+      <li class="entry reveal" style="--i:1">
+        <div class="entry-date">MONTH YEAR</div>
+        <div class="entry-body panel">
+          <h3>The one before that</h3>
+          <p>What happened, and how it went.</p>
+        </div>
+      </li>
+      <li class="entry reveal" style="--i:2">
+        <div class="entry-date">MONTH YEAR</div>
+        <div class="entry-body panel">
+          <h3>Something from earlier in the year</h3>
+          <p>Worth remembering, worth writing down.</p>
+        </div>
+      </li>
+      <li class="entry reveal" style="--i:3">
+        <div class="entry-date">MONTH YEAR</div>
+        <div class="entry-body panel">
+          <h3>Where this timeline starts</h3>
+          <p>The oldest update you want to keep on the page.</p>
+        </div>
+      </li>
+      <!-- ============ /EDIT ============ -->
+    </ol>
+
+    <aside class="side-photo" aria-hidden="true">
+      <img src="images/side-03.svg" alt="" width="520" height="680" loading="lazy">
+    </aside>
+  </div>
+</section>
+
+
+<!-- ==================================================================
+     CONTACT
+     ================================================================== -->
+<section id="contact" class="view" aria-labelledby="contact-title" hidden>
+  <div class="section-head">
+    <p class="prompt reveal" style="--i:0">
+      <span class="p-path">~/contact</span><span class="p-sym">$</span><span class="p-cmd typed">ping eddie</span><span class="caret" aria-hidden="true"></span>
+    </p>
+    <h2 id="contact-title" class="section-title reveal" style="--i:1">Get in <span class="hl scramble">touch</span></h2>
+    <p class="section-lede reveal" style="--i:2">
+      Replace this with how you'd like people to reach you, and what you're happy to be contacted about.
+    </p>
+  </div>
+
+  <div class="with-side">
+    <div class="link-stack">
+      <!-- ============ EDIT ME: CONTACT LINKS
+           Change each href to your real address/profile, or delete the row.
+           Email uses mailto:, the rest are normal https:// links.
+      -->
+      <a class="link-card panel reveal" style="--i:0" href="mailto:you@example.com">
+        <span class="link-cmd">mail</span>
+        <span class="link-val">you@example.com</span>
+        <span class="link-tag">email</span>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link-card panel reveal" style="--i:1" href="https://github.com/nastypig67" target="_blank" rel="noopener">
+        <span class="link-cmd">gh</span>
+        <span class="link-val">@nastypig67</span>
+        <span class="link-tag">github</span>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link-card panel reveal" style="--i:2" href="https://instagram.com/yourhandle" target="_blank" rel="noopener">
+        <span class="link-cmd">open</span>
+        <span class="link-val">@yourhandle</span>
+        <span class="link-tag">instagram</span>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link-card panel reveal" style="--i:3" href="https://x.com/yourhandle" target="_blank" rel="noopener">
+        <span class="link-cmd">open</span>
+        <span class="link-val">@yourhandle</span>
+        <span class="link-tag">x / twitter</span>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link-card panel reveal" style="--i:4" href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener">
+        <span class="link-cmd">open</span>
+        <span class="link-val">/in/yourhandle</span>
+        <span class="link-tag">linkedin</span>
+        <span class="link-arrow" aria-hidden="true">→</span>
+      </a>
+      <!-- ============ /EDIT ============ -->
+    </div>
+
+    <aside class="side-photo" aria-hidden="true">
+      <img src="images/side-04.svg" alt="" width="520" height="680" loading="lazy">
+    </aside>
+  </div>
+</section>
+
+</main>
+
+<!-- Photo lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lb-close" type="button" aria-label="Close photo viewer">✕</button>
+  <button class="lb-prev" type="button" aria-label="Previous photo">‹</button>
+  <button class="lb-next" type="button" aria-label="Next photo">›</button>
+  <figure class="lb-figure">
+    <img class="lb-img" src="" alt="">
+    <figcaption class="lb-caption"></figcaption>
+  </figure>
+</div>
+
+<!-- Command palette -->
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+  <div class="palette-box">
+    <div class="palette-input-row">
+      <span class="palette-prompt" aria-hidden="true">&gt;</span>
+      <input id="palette-input" type="text" autocomplete="off" spellcheck="false"
+             placeholder="jump to a section…" aria-label="Jump to a section"
+             role="combobox" aria-expanded="true" aria-controls="palette-list">
+    </div>
+    <ul class="palette-list" id="palette-list" role="listbox" aria-label="Sections"></ul>
+    <div class="palette-foot">↑↓ move · ⏎ open · esc close</div>
+  </div>
+</div>
+
+<!-- Keyboard shortcut sheet -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet-box">
+    <h2 class="sheet-title" id="sheet-title">keyboard shortcuts</h2>
+    <ul class="sheet-list">
+      <li><span>command palette</span> <kbd>⌘K</kbd></li>
+      <li><span>jump to section</span> <kbd>1</kbd>–<kbd>7</kbd></li>
+      <li><span>next / previous tab</span> <kbd>→</kbd> <kbd>←</kbd></li>
+      <li><span>photo viewer: navigate</span> <kbd>→</kbd> <kbd>←</kbd></li>
+      <li><span>close anything</span> <kbd>esc</kbd></li>
+      <li><span>this sheet</span> <kbd>?</kbd></li>
+    </ul>
+    <div class="sheet-foot">esc to close</div>
+  </div>
+</div>
+
+<!-- Status bar -->
+<footer class="statusbar">
+  <span class="sb-item"><span class="sb-dot" aria-hidden="true"></span><span id="sb-section">home</span></span>
+  <span class="sb-item sb-hide">© <span id="year">2026</span> Eddie Kong</span>
+  <span class="sb-item sb-right"><span class="sb-hide" id="sb-view">0×0</span></span>
+  <span class="sb-item sb-hide">up <span id="sb-uptime">00:00</span></span>
+  <span class="sb-item" id="sb-clock">--:--:--</span>
+  <span class="sb-item"><a href="#" id="sheet-open"><span class="sb-key">?</span> keys</a></span>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
