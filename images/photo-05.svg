@@ -1,39 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 1040" width="820" height="1040" role="img" aria-label="IMG_05 placeholder">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 1040" width="820" height="1040" role="img" aria-label="PHOTO 05 placeholder">
   <defs>
-    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M32 0H0V32" fill="none" stroke="#ff3b52" stroke-opacity="0.10" stroke-width="1"/>
-    </pattern>
-    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ff3b52" stop-opacity="0.16"/>
-      <stop offset="0.55" stop-color="#ff3b52" stop-opacity="0.03"/>
-      <stop offset="1" stop-color="#ff3b52" stop-opacity="0.10"/>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#a855f7"/>
     </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2" fill="#ffffff" opacity="0.18"/>
+    </pattern>
   </defs>
-
-  <rect width="820" height="1040" fill="#0a0e14"/>
-  <rect width="820" height="1040" fill="url(#grid)"/>
-  <rect width="820" height="1040" fill="url(#glow)"/>
-
-  <!-- frame -->
-  <rect x="10.5" y="10.5" width="799" height="1019" fill="none" stroke="#ff3b52" stroke-opacity="0.42" stroke-width="1"/>
-
-  <!-- corner ticks -->
-  <g stroke="#ff3b52" stroke-opacity="0.95" stroke-width="2" fill="none">
-    <path d="M10 59V10h49"/>
-    <path d="M761 10H810v49"/>
-    <path d="M10 981V1030h49"/>
-    <path d="M761 1030H810v-49"/>
+  <rect width="820" height="1040" fill="url(#g)"/>
+  <rect width="820" height="1040" fill="url(#dots)"/>
+  <g fill="#ffffff" font-family="Helvetica,Arial,sans-serif" text-anchor="middle">
+    <text x="410" y="520" font-size="90" font-weight="700" opacity="0.95" letter-spacing="2">PHOTO 05</text>
+    <text x="410" y="623" font-size="45" font-weight="500" opacity="0.75" letter-spacing="1">replace me</text>
   </g>
-
-  <!-- label -->
-  <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" text-anchor="middle">
-    <text x="410" y="520" font-size="69" font-weight="700" fill="#ff3b52" letter-spacing="3">IMG_05</text>
-    <text x="410" y="606" font-size="28" fill="#6b7f8d" letter-spacing="2">replace me</text>
-    <text x="410" y="664" font-size="28" fill="#ff3b52" fill-opacity="0.45" letter-spacing="1">820 x 1040</text>
-  </g>
-
-  <!-- scanline hint -->
-  <g stroke="#ff3b52" stroke-opacity="0.06" stroke-width="1">
-    <path d="M0 228H820"/><path d="M0 520H820"/><path d="M0 811H820"/>
-  </g>
+  <rect x="8" y="8" width="804" height="1024" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3" stroke-dasharray="14 10" rx="10"/>
 </svg>

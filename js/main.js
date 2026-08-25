@@ -151,16 +151,31 @@
     });
   }
 
-  /* ---------- 4. Panel spotlight ----------------------------------- */
+  /* ---------- 4. Card spotlight + tilt ------------------------------ */
 
   if (canHover) {
+    // One delegated listener drives both effects: the glow follows the
+    // cursor inside the card, and the card leans toward it.
     document.addEventListener('pointermove', function (e) {
       var panel = e.target.closest && e.target.closest('.panel');
       if (!panel) return;
       var box = panel.getBoundingClientRect();
-      panel.style.setProperty('--mx', (e.clientX - box.left) + 'px');
-      panel.style.setProperty('--my', (e.clientY - box.top) + 'px');
+      var x = e.clientX - box.left;
+      var y = e.clientY - box.top;
+      panel.style.setProperty('--mx', x + 'px');
+      panel.style.setProperty('--my', y + 'px');
+      if (!reduceMotion && panel.classList.contains('tilt')) {
+        panel.style.setProperty('--ry', ((x / box.width  - 0.5) *  7).toFixed(2) + 'deg');
+        panel.style.setProperty('--rx', ((y / box.height - 0.5) * -7).toFixed(2) + 'deg');
+      }
     }, { passive: true });
+
+    document.addEventListener('pointerout', function (e) {
+      var panel = e.target.closest && e.target.closest('.tilt');
+      if (!panel || panel.contains(e.relatedTarget)) return;
+      panel.style.setProperty('--rx', '0deg');
+      panel.style.setProperty('--ry', '0deg');
+    });
   }
 
   /* ---------- 5. Hero collage parallax ------------------------------ */
@@ -386,24 +401,15 @@
 
   /* ---------- 8. Boot sequence -------------------------------------- */
 
-  var boot = document.getElementById('boot');
-  var bootLog = document.getElementById('boot-log');
-
-  var BOOT_LINES = [
-    ['booting eddiekong.com', 'dim'],
-    ['> mounting /home /facts /photos /opinions', ''],
-    ['> loading dog module ................ ', 'ok:OK'],
-    ['> fetching opinions ................. ', 'ok:LOADED'],
-    ['> checking life.log ................. ', 'ok:FRESH'],
-    ['> ready_', 'ok']
-  ];
+  var boot     = document.getElementById('boot');
+  var bootName = document.getElementById('boot-name');
+  var bootFill = document.getElementById('boot-fill');
 
   function runBoot(done) {
     bootRunning = true;
     boot.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
 
-    var i = 0;
     var timer = null;
 
     function finish() {
@@ -414,7 +420,7 @@
       boot.removeEventListener('click', skip);
       boot.classList.add('done');
       document.body.style.overflow = '';
-      setTimeout(function () { boot.setAttribute('hidden', ''); }, 320);
+      setTimeout(function () { boot.setAttribute('hidden', ''); }, 340);
       store('booted', '1');
       done();
     }
@@ -425,30 +431,13 @@
       finish();
     }
 
-    function next() {
-      if (i >= BOOT_LINES.length) { timer = setTimeout(finish, 380); return; }
-      var line = BOOT_LINES[i++];
-      var span = document.createElement('span');
-      var cls = line[1];
-      if (cls.indexOf('ok:') === 0) {
-        span.textContent = line[0];
-        var tag = document.createElement('span');
-        tag.className = 'ok';
-        tag.textContent = '[ ' + cls.slice(3) + ' ]';
-        bootLog.appendChild(span);
-        bootLog.appendChild(tag);
-      } else {
-        span.className = cls;
-        span.textContent = line[0];
-        bootLog.appendChild(span);
-      }
-      bootLog.appendChild(document.createTextNode('\n'));
-      timer = setTimeout(next, 190 + Math.random() * 90);
-    }
-
     document.addEventListener('keydown', skip, true);
     boot.addEventListener('click', skip);
-    next();
+
+    if (bootName) scramble(bootName);
+    // Let the bar paint at zero width before it transitions to full.
+    if (bootFill) setTimeout(function () { bootFill.style.width = '100%'; }, 40);
+    timer = setTimeout(finish, 1650);
   }
 
   /* ---------- 9. Photo lightbox ------------------------------------- */
@@ -526,7 +515,9 @@
   var COMMANDS = tabs.map(function (tab, i) {
     return {
       id: tab.getAttribute('href').slice(1),
-      label: tab.textContent.trim(),
+      // Tab labels contain non-breaking spaces ("My Dog") — normalise them
+      // so typing an ordinary space still matches.
+      label: tab.textContent.replace(/ /g, ' ').trim(),
       key: String(i + 1)
     };
   });
@@ -534,7 +525,7 @@
   function renderPalette() {
     var query = palInput.value.trim().toLowerCase();
     palMatches = COMMANDS.filter(function (c) {
-      return !query || c.label.indexOf(query) !== -1 || c.id.indexOf(query) !== -1;
+      return !query || c.label.toLowerCase().indexOf(query) !== -1 || c.id.indexOf(query) !== -1;
     });
     if (palIndex >= palMatches.length) palIndex = 0;
 
@@ -550,7 +541,13 @@
       var li = document.createElement('li');
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', i === palIndex ? 'true' : 'false');
-      li.innerHTML = '<span>cd ~/' + c.id + '</span><span class="pl-key">' + c.key + '</span>';
+      var name = document.createElement('span');
+      name.textContent = c.label;
+      var key = document.createElement('span');
+      key.className = 'pl-key';
+      key.textContent = c.key;
+      li.appendChild(name);
+      li.appendChild(key);
       li.addEventListener('click', function () { closePalette(); go(c.id); });
       li.addEventListener('pointermove', function () {
         if (palIndex === i) return;
