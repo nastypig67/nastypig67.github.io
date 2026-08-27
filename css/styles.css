@@ -184,13 +184,11 @@ a { color: inherit; }
   white-space: nowrap;
 }
 .brand-dot {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 16px var(--accent);
+  font-size: 15px;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px var(--accent));
   animation: pulse 2.6s ease-in-out infinite;
-  transition: background var(--theme-ms) ease, box-shadow var(--theme-ms) ease;
+  transition: filter var(--theme-ms) ease;
 }
 @keyframes pulse {
   0%, 100% { transform: scale(1);    opacity: 1;    }
