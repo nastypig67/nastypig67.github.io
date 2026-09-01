@@ -736,6 +736,34 @@ html:not(.js) .boot { display: none; }
   object-fit: cover;
 }
 
+/* Embedded video. The frame holds the 16:9 shape so the iframe can simply
+   fill it, whatever the player decides to report as its own size. */
+.dog-video {
+  margin: 0 0 30px;
+  padding: 14px;
+  overflow: hidden;
+}
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.dog-video figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
 /* ---------- 5f. Life updates --------------------------------------- */
 
 .timeline {
