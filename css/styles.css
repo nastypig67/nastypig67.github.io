@@ -750,6 +750,12 @@ html:not(.js) .boot { display: none; }
   overflow: hidden;
   background: #000;
 }
+/* Vertical clips (YouTube Shorts) — keep the 9:16 frame centred and capped. */
+.video-frame--portrait {
+  aspect-ratio: 9 / 16;
+  max-width: min(340px, 100%);
+  margin-inline: auto;
+}
 .video-frame iframe {
   position: absolute;
   inset: 0;
