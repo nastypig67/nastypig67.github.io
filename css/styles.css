@@ -750,10 +750,12 @@ html:not(.js) .boot { display: none; }
   overflow: hidden;
   background: #000;
 }
-/* Vertical clips (YouTube Shorts) — keep the 9:16 frame centred and capped. */
+/* Vertical clips (YouTube Shorts) — keep the 9:16 frame centred, as wide as
+   it can be without growing taller than most of the viewport. The last term
+   is the width a 9:16 box has when it is 82vh tall (82 x 9/16). */
 .video-frame--portrait {
   aspect-ratio: 9 / 16;
-  max-width: min(340px, 100%);
+  width: min(520px, 100%, 46.1vh);
   margin-inline: auto;
 }
 .video-frame iframe {
