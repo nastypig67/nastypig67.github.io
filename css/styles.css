@@ -16,22 +16,32 @@
 
 /* Registering the accents as real colors lets the background wash
    cross-fade between section themes instead of cutting. */
-@property --accent   { syntax: '<color>'; inherits: true; initial-value: #a855f7; }
-@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: #ec4899; }
-@property --accent-3 { syntax: '<color>'; inherits: true; initial-value: #22d3ee; }
+@property --accent   { syntax: '<color>'; inherits: true; initial-value: #ff6b5e; }
+@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: #3d8bff; }
+@property --accent-3 { syntax: '<color>'; inherits: true; initial-value: #3d8bff; }
 
 :root {
-  --bg:        #08070f;
-  --ink:       #f5f2ff;
-  --muted:     #a9a3c4;
-  --dim:       #6b6486;
-  --card:      rgba(255, 255, 255, 0.045);
-  --card-hi:   rgba(255, 255, 255, 0.085);
-  --line:      rgba(255, 255, 255, 0.12);
+  /* ============ EDIT ME: SITE PALETTE ============
+     The whole site uses just these four colours. Everything else
+     (muted text, cards, lines) is mixed from them. */
+  --c-bg:      #14122b;   /* background: deep indigo */
+  --c-text:    #f7f5ff;   /* text: off-white */
+  --c-main:    #ff6b5e;   /* main accent: coral */
+  --c-second:  #3d8bff;   /* second accent: electric blue */
+  /* ============ /EDIT ============ */
 
-  --accent:    #a855f7;
-  --accent-2:  #ec4899;
-  --accent-3:  #22d3ee;
+  --bg:        var(--c-bg);
+  --ink:       var(--c-text);
+  --muted:     color-mix(in oklab, var(--c-text) 68%, var(--c-bg));
+  --dim:       color-mix(in oklab, var(--c-text) 42%, var(--c-bg));
+  --card:      rgba(247, 245, 255, 0.045);
+  --card-hi:   rgba(247, 245, 255, 0.085);
+  --line:      rgba(247, 245, 255, 0.12);
+  --on-accent: var(--c-bg);   /* text sitting on a gold/teal fill */
+
+  --accent:    var(--c-main);
+  --accent-2:  var(--c-second);
+  --accent-3:  var(--c-second);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-disp: ui-rounded, "SF Pro Rounded", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -45,20 +55,11 @@
   color-scheme: dark;
 }
 
-/* ---------- EDIT ME: SECTION COLORS -------------------------------
-   One trio per section. --accent is the primary, --accent-2 pairs with
-   it in gradients, --accent-3 is the highlight. Change any hex here and
-   that whole tab re-themes: background wash, constellation, headings,
-   borders, button glows.
+/* ---------- SECTION COLORS ----------------------------------------
+   Every section shares the four-colour palette above. To give one tab
+   its own look again, add e.g.
+   [data-section="football"] { --accent: var(--c-second); --accent-2: var(--c-main); }
    ------------------------------------------------------------------ */
-[data-section="home"]     { --accent:#a855f7; --accent-2:#ec4899; --accent-3:#22d3ee; }
-[data-section="facts"]    { --accent:#22d3ee; --accent-2:#3b82f6; --accent-3:#a855f7; }
-[data-section="opinions"] { --accent:#ff4d5a; --accent-2:#ff9a3d; --accent-3:#f43f5e; }
-[data-section="history"]  { --accent:#d4a24c; --accent-2:#2563eb; --accent-3:#f5d27a; }
-[data-section="football"] { --accent:#22c55e; --accent-2:#38bdf8; --accent-3:#e2e8f0; }
-[data-section="dog"]      { --accent:#3ddc84; --accent-2:#a3e635; --accent-3:#14b8a6; }
-[data-section="updates"]  { --accent:#fbbf24; --accent-2:#fb923c; --accent-3:#f59e0b; }
-[data-section="contact"]  { --accent:#ec4899; --accent-2:#d946ef; --accent-3:#f472b6; }
 
 /* The accents switch instantly — every element that uses them eases its
    own color/background/border/shadow, which is what you actually see.
@@ -86,7 +87,7 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--accent); color: var(--on-accent); }
 
 /* Constellation canvas, drawn in js/main.js. */
 #net {
@@ -138,7 +139,7 @@ a { color: inherit; }
   top: 0;
   z-index: 100;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   padding: 10px 16px;
   border-radius: 0 0 10px 0;
   font-weight: 700;
@@ -229,7 +230,7 @@ a { color: inherit; }
   transition: color 260ms ease, transform 260ms cubic-bezier(.34,1.56,.64,1);
 }
 .tab:hover  { color: var(--ink); transform: translateY(-2px); }
-.tab[aria-current="page"] { color: #fff; }
+.tab[aria-current="page"] { color: var(--on-accent); }
 
 /* The pill that slides between tabs. Position is set in js/main.js. */
 .tab-glider {
@@ -382,7 +383,7 @@ html:not(.js) .boot { display: none; }
 .btn-primary {
   background: linear-gradient(120deg, var(--accent), var(--accent-2));
   border-color: transparent;
-  color: #fff;
+  color: var(--on-accent);
   box-shadow: 0 12px 30px -12px var(--accent);
 }
 .btn-primary:hover { box-shadow: 0 20px 44px -14px var(--accent); }
@@ -461,7 +462,7 @@ html:not(.js) .boot { display: none; }
   position: absolute;
   width: 46%;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(247, 245, 255, 0.18);
   box-shadow: 0 34px 70px -34px #000;
   object-fit: cover;
   translate: calc(var(--px) * var(--d)) calc(var(--py) * var(--d));
@@ -588,7 +589,7 @@ html:not(.js) .boot { display: none; }
   padding: 8px 12px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: #fff;
+  color: var(--ink);
   background: linear-gradient(90deg,
     color-mix(in oklab, var(--accent) 85%, transparent),
     color-mix(in oklab, var(--accent-2) 85%, transparent));
@@ -607,7 +608,7 @@ html:not(.js) .boot { display: none; }
   height: 40%;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  background: linear-gradient(180deg, transparent, rgba(247, 245, 255, 0.28), transparent);
   opacity: 0;
 }
 .shot-btn:hover::before { opacity: 1; animation: sweep 1.6s linear infinite; }
@@ -861,6 +862,94 @@ html:not(.js) .boot { display: none; }
 }
 .link-card:hover .link-arrow { transform: translateX(8px); }
 
+/* ---------- 5g2. Artefact of the month (History Explorer) ----------- */
+.ff {
+  margin: 0 0 40px;
+  padding: 24px 28px 10px;
+  border-color: color-mix(in oklab, var(--accent) 45%, transparent);
+  background:
+    linear-gradient(140deg,
+      color-mix(in oklab, var(--accent) 14%, transparent),
+      color-mix(in oklab, var(--accent-2) 8%, transparent)),
+    var(--card);
+}
+.ff-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 16px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed color-mix(in oklab, var(--accent) 50%, transparent);
+}
+.ff-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ff-stamp {
+  margin: 0;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, transparent);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ff-main { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+.ff-gear {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  animation: ff-spin 24s linear infinite;
+}
+@keyframes ff-spin { to { transform: rotate(360deg); } }
+.ff-title {
+  margin: 0;
+  font-family: var(--font-disp);
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.ff-sub { margin: 4px 0 0; color: var(--muted); }
+.ff-list { margin: 0; }
+.ff-row {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 6px 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.ff-row dt {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 2px;
+}
+.ff-row dd { margin: 0; }
+.ff-wow dd { font-weight: 700; }
+.ff-wow dt::before { content: "★ "; color: var(--accent-3); }
+@media (max-width: 560px) {
+  .ff { padding: 20px 18px 6px; }
+  .ff-row { grid-template-columns: minmax(0, 1fr); }
+  .ff-gear { width: 48px; height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .ff-gear { animation: none; } }
+
 /* ---------- 5h. Team builder (Football Corner) --------------------- */
 /* Runs on CSS alone: each checked radio sets its slot's rating, and the
    average is rounded by the registered <integer> properties below. */
@@ -1009,11 +1098,13 @@ html:not(.js) .boot { display: none; }
   justify-content: space-around;
   padding: 10px 6px;
   border-radius: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(247, 245, 255, 0.35);
   background:
-    linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)) center / 100% 2px no-repeat,
-    radial-gradient(circle at 50% 50%, transparent 15%, rgba(255,255,255,0.35) 15.5%, transparent 16.5%),
-    repeating-linear-gradient(180deg, #1f7a3d 0 12.5%, #1b6c36 12.5% 25%);
+    linear-gradient(rgba(247, 245, 255,0.35), rgba(247, 245, 255,0.35)) center / 100% 2px no-repeat,
+    radial-gradient(circle at 50% 50%, transparent 15%, rgba(247, 245, 255,0.35) 15.5%, transparent 16.5%),
+    repeating-linear-gradient(180deg,
+      color-mix(in oklab, var(--c-second) 62%, var(--c-bg)) 0 12.5%,
+      color-mix(in oklab, var(--c-second) 52%, var(--c-bg)) 12.5% 25%);
   overflow: hidden;
 }
 .tb-row { display: flex; justify-content: space-around; gap: 4px; }
@@ -1033,8 +1124,8 @@ html:not(.js) .boot { display: none; }
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 2px dashed rgba(255, 255, 255, 0.6);
-  color: #fff;
+  border: 2px dashed rgba(247, 245, 255, 0.6);
+  color: color-mix(in oklab, var(--on-accent) calc(var(--filled, 0) * 100%), var(--ink));
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -1042,7 +1133,7 @@ html:not(.js) .boot { display: none; }
 }
 .tb-slot[class] .tb-slot-pos { /* filled look, switched on by --filled */
   border-style: solid;
-  border-color: rgba(255, 255, 255, calc(0.6 + 0.4 * var(--filled)));
+  border-color: rgba(247, 245, 255, calc(0.6 + 0.4 * var(--filled)));
   background: linear-gradient(120deg,
     color-mix(in oklab, var(--accent) calc(var(--filled) * 100%), transparent),
     color-mix(in oklab, var(--accent-2) calc(var(--filled) * 100%), transparent));
@@ -1054,7 +1145,7 @@ html:not(.js) .boot { display: none; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #fff;
+  color: var(--ink);
   font-size: 0.72rem;
   font-weight: 700;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
@@ -1106,7 +1197,7 @@ html:not(.js) .boot { display: none; }
 .tb-in:checked + .tb-opt {
   background: linear-gradient(120deg, var(--accent), var(--accent-2));
   border-color: transparent;
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 700;
 }
 .tb-in:focus-visible + .tb-opt { outline: 2px solid var(--accent-3); outline-offset: 2px; }
@@ -1312,7 +1403,7 @@ html:not(.js) #tb-random { display: none; }   /* random needs JavaScript */
 
 .palette-box, .sheet-box {
   width: min(560px, 100%);
-  background: #12101d;
+  background: color-mix(in oklab, var(--c-bg) 90%, var(--c-text));
   border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
   border-radius: var(--radius);
   box-shadow: 0 30px 80px -30px #000, 0 0 60px -24px var(--accent);
@@ -1351,7 +1442,7 @@ html:not(.js) #tb-random { display: none; }   /* random needs JavaScript */
   cursor: pointer;
 }
 .palette-list li[aria-selected="true"] {
-  color: #fff;
+  color: var(--on-accent);
   background: linear-gradient(100deg,
     color-mix(in oklab, var(--accent) 65%, transparent),
     color-mix(in oklab, var(--accent-2) 55%, transparent));
