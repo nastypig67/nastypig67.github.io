@@ -194,7 +194,7 @@
 
   /* ---------- 6. Constellation canvas ------------------------------- */
 
-  var accent = '#ff6b5e';
+  var accent = '#22d3ee';
 
   function readAccent() {
     var value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();

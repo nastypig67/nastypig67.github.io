@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 680" width="520" height="680" role="img" aria-label="SIDE 02 placeholder">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ff6b5e"/>
-      <stop offset="1" stop-color="#3d8bff"/>
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
     </linearGradient>
     <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
-      <circle cx="4" cy="4" r="2" fill="#f7f5ff" opacity="0.18"/>
+      <circle cx="4" cy="4" r="2" fill="#eaf4ff" opacity="0.18"/>
     </pattern>
   </defs>
   <rect width="520" height="680" fill="url(#g)"/>
   <rect width="520" height="680" fill="url(#dots)"/>
-  <g fill="#f7f5ff" font-family="Helvetica,Arial,sans-serif" text-anchor="middle">
+  <g fill="#eaf4ff" font-family="Helvetica,Arial,sans-serif" text-anchor="middle">
     <text x="260" y="340" font-size="57" font-weight="700" opacity="0.95" letter-spacing="2">SIDE 02</text>
     <text x="260" y="405" font-size="28" font-weight="500" opacity="0.75" letter-spacing="1">replace me</text>
   </g>
-  <rect x="8" y="8" width="504" height="664" fill="none" stroke="#f7f5ff" stroke-opacity="0.35" stroke-width="3" stroke-dasharray="14 10" rx="10"/>
+  <rect x="8" y="8" width="504" height="664" fill="none" stroke="#eaf4ff" stroke-opacity="0.35" stroke-width="3" stroke-dasharray="14 10" rx="10"/>
 </svg>

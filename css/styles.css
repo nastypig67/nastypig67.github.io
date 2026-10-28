@@ -16,27 +16,27 @@
 
 /* Registering the accents as real colors lets the background wash
    cross-fade between section themes instead of cutting. */
-@property --accent   { syntax: '<color>'; inherits: true; initial-value: #ff6b5e; }
-@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: #3d8bff; }
-@property --accent-3 { syntax: '<color>'; inherits: true; initial-value: #3d8bff; }
+@property --accent   { syntax: '<color>'; inherits: true; initial-value: #22d3ee; }
+@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: #a78bfa; }
+@property --accent-3 { syntax: '<color>'; inherits: true; initial-value: #a78bfa; }
 
 :root {
   /* ============ EDIT ME: SITE PALETTE ============
      The whole site uses just these four colours. Everything else
      (muted text, cards, lines) is mixed from them. */
-  --c-bg:      #14122b;   /* background: deep indigo */
-  --c-text:    #f7f5ff;   /* text: off-white */
-  --c-main:    #ff6b5e;   /* main accent: coral */
-  --c-second:  #3d8bff;   /* second accent: electric blue */
+  --c-bg:      #0b1430;   /* background: midnight blue */
+  --c-text:    #eaf4ff;   /* text: icy white */
+  --c-main:    #22d3ee;   /* main accent: cyan */
+  --c-second:  #a78bfa;   /* second accent: lavender violet */
   /* ============ /EDIT ============ */
 
   --bg:        var(--c-bg);
   --ink:       var(--c-text);
   --muted:     color-mix(in oklab, var(--c-text) 68%, var(--c-bg));
   --dim:       color-mix(in oklab, var(--c-text) 42%, var(--c-bg));
-  --card:      rgba(247, 245, 255, 0.045);
-  --card-hi:   rgba(247, 245, 255, 0.085);
-  --line:      rgba(247, 245, 255, 0.12);
+  --card:      rgba(234, 244, 255, 0.045);
+  --card-hi:   rgba(234, 244, 255, 0.085);
+  --line:      rgba(234, 244, 255, 0.12);
   --on-accent: var(--c-bg);   /* text sitting on a gold/teal fill */
 
   --accent:    var(--c-main);
@@ -462,7 +462,7 @@ html:not(.js) .boot { display: none; }
   position: absolute;
   width: 46%;
   border-radius: 20px;
-  border: 1px solid rgba(247, 245, 255, 0.18);
+  border: 1px solid rgba(234, 244, 255, 0.18);
   box-shadow: 0 34px 70px -34px #000;
   object-fit: cover;
   translate: calc(var(--px) * var(--d)) calc(var(--py) * var(--d));
@@ -608,7 +608,7 @@ html:not(.js) .boot { display: none; }
   height: 40%;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(247, 245, 255, 0.28), transparent);
+  background: linear-gradient(180deg, transparent, rgba(234, 244, 255, 0.28), transparent);
   opacity: 0;
 }
 .shot-btn:hover::before { opacity: 1; animation: sweep 1.6s linear infinite; }
@@ -1098,13 +1098,13 @@ html:not(.js) .boot { display: none; }
   justify-content: space-around;
   padding: 10px 6px;
   border-radius: 14px;
-  border: 2px solid rgba(247, 245, 255, 0.35);
+  border: 2px solid rgba(234, 244, 255, 0.35);
   background:
-    linear-gradient(rgba(247, 245, 255,0.35), rgba(247, 245, 255,0.35)) center / 100% 2px no-repeat,
-    radial-gradient(circle at 50% 50%, transparent 15%, rgba(247, 245, 255,0.35) 15.5%, transparent 16.5%),
+    linear-gradient(rgba(234, 244, 255,0.35), rgba(234, 244, 255,0.35)) center / 100% 2px no-repeat,
+    radial-gradient(circle at 50% 50%, transparent 15%, rgba(234, 244, 255,0.35) 15.5%, transparent 16.5%),
     repeating-linear-gradient(180deg,
-      color-mix(in oklab, var(--c-second) 62%, var(--c-bg)) 0 12.5%,
-      color-mix(in oklab, var(--c-second) 52%, var(--c-bg)) 12.5% 25%);
+      color-mix(in oklab, var(--c-main) 48%, var(--c-bg)) 0 12.5%,
+      color-mix(in oklab, var(--c-main) 40%, var(--c-bg)) 12.5% 25%);
   overflow: hidden;
 }
 .tb-row { display: flex; justify-content: space-around; gap: 4px; }
@@ -1124,7 +1124,7 @@ html:not(.js) .boot { display: none; }
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 2px dashed rgba(247, 245, 255, 0.6);
+  border: 2px dashed rgba(234, 244, 255, 0.6);
   color: color-mix(in oklab, var(--on-accent) calc(var(--filled, 0) * 100%), var(--ink));
   font-size: 0.7rem;
   font-weight: 800;
@@ -1133,7 +1133,7 @@ html:not(.js) .boot { display: none; }
 }
 .tb-slot[class] .tb-slot-pos { /* filled look, switched on by --filled */
   border-style: solid;
-  border-color: rgba(247, 245, 255, calc(0.6 + 0.4 * var(--filled)));
+  border-color: rgba(234, 244, 255, calc(0.6 + 0.4 * var(--filled)));
   background: linear-gradient(120deg,
     color-mix(in oklab, var(--accent) calc(var(--filled) * 100%), transparent),
     color-mix(in oklab, var(--accent-2) calc(var(--filled) * 100%), transparent));
