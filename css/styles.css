@@ -53,8 +53,9 @@
    ------------------------------------------------------------------ */
 [data-section="home"]     { --accent:#a855f7; --accent-2:#ec4899; --accent-3:#22d3ee; }
 [data-section="facts"]    { --accent:#22d3ee; --accent-2:#3b82f6; --accent-3:#a855f7; }
-[data-section="photos"]   { --accent:#4f7cff; --accent-2:#7c3aed; --accent-3:#06b6d4; }
 [data-section="opinions"] { --accent:#ff4d5a; --accent-2:#ff9a3d; --accent-3:#f43f5e; }
+[data-section="history"]  { --accent:#d4a24c; --accent-2:#2563eb; --accent-3:#f5d27a; }
+[data-section="football"] { --accent:#22c55e; --accent-2:#38bdf8; --accent-3:#e2e8f0; }
 [data-section="dog"]      { --accent:#3ddc84; --accent-2:#a3e635; --accent-3:#14b8a6; }
 [data-section="updates"]  { --accent:#fbbf24; --accent-2:#fb923c; --accent-3:#f59e0b; }
 [data-section="contact"]  { --accent:#ec4899; --accent-2:#d946ef; --accent-3:#f472b6; }
@@ -526,6 +527,15 @@ html:not(.js) .boot { display: none; }
   transform-origin: left;
   transition: transform 420ms cubic-bezier(.22,1,.36,1);
 }
+/* History Explorer: one subtitle + fact grid per civilisation */
+.era + .era { margin-top: 44px; }
+.era-title {
+  margin: 0 0 16px;
+  font-family: var(--font-disp);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
 .fact:hover::before { transform: scaleX(1); }
 .fact p { margin: 0; }
 .fact-num {
@@ -850,6 +860,335 @@ html:not(.js) .boot { display: none; }
   transition: transform 300ms cubic-bezier(.34,1.56,.64,1), color var(--theme-ms) ease;
 }
 .link-card:hover .link-arrow { transform: translateX(8px); }
+
+/* ---------- 5h. Team builder (Football Corner) --------------------- */
+/* Runs on CSS alone: each checked radio sets its slot's rating, and the
+   average is rounded by the registered <integer> properties below. */
+
+@property --tb-score   { syntax: '<integer>'; inherits: true; initial-value: 0; }
+@property --tb-diff    { syntax: '<integer>'; inherits: true; initial-value: 0; }
+@property --tb-adiff   { syntax: '<integer>'; inherits: true; initial-value: 0; }
+@property --tb-matches { syntax: '<integer>'; inherits: true; initial-value: 0; }
+
+.tb {
+  --gk: 0; --lb: 0; --lcb: 0; --rcb: 0; --rb: 0; --cdm: 0; --lm: 0; --rm: 0; --cam: 0; --lst: 0; --rst: 0;
+  --m-gk: 0; --m-lb: 0; --m-lcb: 0; --m-rcb: 0; --m-rb: 0; --m-cdm: 0; --m-lm: 0; --m-rm: 0; --m-cam: 0; --m-lst: 0; --m-rst: 0;
+  --tb-eddie: 96;   /* Eddie's XI score — update if you change ratings */
+  --tb-score: calc((var(--gk) + var(--lb) + var(--lcb) + var(--rcb) + var(--rb) + var(--cdm)
+                  + var(--lm) + var(--rm) + var(--cam) + var(--lst) + var(--rst)) / 11);
+  --tb-diff: calc(var(--tb-score) - var(--tb-eddie));
+  --tb-adiff: max(var(--tb-diff), calc(-1 * var(--tb-diff)));
+  --tb-matches: calc(var(--m-gk) + var(--m-lb) + var(--m-lcb) + var(--m-rcb) + var(--m-rb) + var(--m-cdm)
+                   + var(--m-lm) + var(--m-rm) + var(--m-cam) + var(--m-lst) + var(--m-rst));
+  counter-reset: tb-picked;
+  margin-top: 34px;
+  padding: 26px 28px;
+}
+
+/* ============ EDIT ME: TEAM RATINGS ============
+   One line per player: the slot's rating when that player is picked.
+   "--m-…: 1" marks Eddie's own pick for that slot.
+*/
+.tb:has(#p-lev-yashin:checked) { --gk: 95; --m-gk: 1; }     /* Lev Yashin */
+.tb:has(#p-gianluigi-buffon:checked) { --gk: 95; }          /* Gianluigi Buffon */
+.tb:has(#p-manuel-neuer:checked) { --gk: 93; }              /* Manuel Neuer */
+.tb:has(#p-roberto-carlos:checked) { --lb: 94; --m-lb: 1; } /* Roberto Carlos */
+.tb:has(#p-nilton-santos:checked) { --lb: 92; }             /* Nílton Santos */
+.tb:has(#p-marcelo:checked) { --lb: 90; }                   /* Marcelo */
+.tb:has(#p-paolo-maldini:checked) { --lcb: 96; --m-lcb: 1; }/* Paolo Maldini */
+.tb:has(#p-fabio-cannavaro:checked) { --lcb: 93; }          /* Fabio Cannavaro */
+.tb:has(#p-sergio-ramos:checked) { --lcb: 92; }             /* Sergio Ramos */
+.tb:has(#p-franco-baresi:checked) { --rcb: 95; --m-rcb: 1; }/* Franco Baresi */
+.tb:has(#p-bobby-moore:checked) { --rcb: 93; }              /* Bobby Moore */
+.tb:has(#p-virgil-van-dijk:checked) { --rcb: 91; }          /* Virgil van Dijk */
+.tb:has(#p-cafu:checked) { --rb: 94; --m-rb: 1; }           /* Cafu */
+.tb:has(#p-carlos-alberto:checked) { --rb: 92; }            /* Carlos Alberto */
+.tb:has(#p-dani-alves:checked) { --rb: 91; }                /* Dani Alves */
+.tb:has(#p-franz-beckenbauer:checked) { --cdm: 97; --m-cdm: 1; }/* Franz Beckenbauer */
+.tb:has(#p-lothar-matthaus:checked) { --cdm: 94; }          /* Lothar Matthäus */
+.tb:has(#p-sergio-busquets:checked) { --cdm: 91; }          /* Sergio Busquets */
+.tb:has(#p-lionel-messi:checked) { --lm: 99; --m-lm: 1; }   /* Lionel Messi */
+.tb:has(#p-cristiano-ronaldo:checked) { --lm: 98; }         /* Cristiano Ronaldo */
+.tb:has(#p-ronaldinho:checked) { --lm: 95; }                /* Ronaldinho */
+.tb:has(#p-diego-maradona:checked) { --rm: 98; --m-rm: 1; } /* Diego Maradona */
+.tb:has(#p-garrincha:checked) { --rm: 95; }                 /* Garrincha */
+.tb:has(#p-david-beckham:checked) { --rm: 90; }             /* David Beckham */
+.tb:has(#p-zinedine-zidane:checked) { --cam: 97; --m-cam: 1; }/* Zinedine Zidane */
+.tb:has(#p-johan-cruyff:checked) { --cam: 98; }             /* Johan Cruyff */
+.tb:has(#p-michel-platini:checked) { --cam: 94; }           /* Michel Platini */
+.tb:has(#p-pele:checked) { --lst: 99; --m-lst: 1; }         /* Pelé */
+.tb:has(#p-gerd-muller:checked) { --lst: 94; }              /* Gerd Müller */
+.tb:has(#p-marco-van-basten:checked) { --lst: 94; }         /* Marco van Basten */
+.tb:has(#p-ronaldo-nazario:checked) { --rst: 97; --m-rst: 1; }/* Ronaldo Nazário */
+.tb:has(#p-eusebio:checked) { --rst: 94; }                  /* Eusébio */
+.tb:has(#p-thierry-henry:checked) { --rst: 93; }            /* Thierry Henry */
+/* ============ /EDIT ============ */
+
+/* Show the picked player's name on the pitch and in the table */
+.pn { display: none; }
+.tb:has(#p-lev-yashin:checked) .n-p-lev-yashin,
+.tb:has(#p-gianluigi-buffon:checked) .n-p-gianluigi-buffon,
+.tb:has(#p-manuel-neuer:checked) .n-p-manuel-neuer,
+.tb:has(#p-roberto-carlos:checked) .n-p-roberto-carlos,
+.tb:has(#p-nilton-santos:checked) .n-p-nilton-santos,
+.tb:has(#p-marcelo:checked) .n-p-marcelo,
+.tb:has(#p-paolo-maldini:checked) .n-p-paolo-maldini,
+.tb:has(#p-fabio-cannavaro:checked) .n-p-fabio-cannavaro,
+.tb:has(#p-sergio-ramos:checked) .n-p-sergio-ramos,
+.tb:has(#p-franco-baresi:checked) .n-p-franco-baresi,
+.tb:has(#p-bobby-moore:checked) .n-p-bobby-moore,
+.tb:has(#p-virgil-van-dijk:checked) .n-p-virgil-van-dijk,
+.tb:has(#p-cafu:checked) .n-p-cafu,
+.tb:has(#p-carlos-alberto:checked) .n-p-carlos-alberto,
+.tb:has(#p-dani-alves:checked) .n-p-dani-alves,
+.tb:has(#p-franz-beckenbauer:checked) .n-p-franz-beckenbauer,
+.tb:has(#p-lothar-matthaus:checked) .n-p-lothar-matthaus,
+.tb:has(#p-sergio-busquets:checked) .n-p-sergio-busquets,
+.tb:has(#p-lionel-messi:checked) .n-p-lionel-messi,
+.tb:has(#p-cristiano-ronaldo:checked) .n-p-cristiano-ronaldo,
+.tb:has(#p-ronaldinho:checked) .n-p-ronaldinho,
+.tb:has(#p-diego-maradona:checked) .n-p-diego-maradona,
+.tb:has(#p-garrincha:checked) .n-p-garrincha,
+.tb:has(#p-david-beckham:checked) .n-p-david-beckham,
+.tb:has(#p-zinedine-zidane:checked) .n-p-zinedine-zidane,
+.tb:has(#p-johan-cruyff:checked) .n-p-johan-cruyff,
+.tb:has(#p-michel-platini:checked) .n-p-michel-platini,
+.tb:has(#p-pele:checked) .n-p-pele,
+.tb:has(#p-gerd-muller:checked) .n-p-gerd-muller,
+.tb:has(#p-marco-van-basten:checked) .n-p-marco-van-basten,
+.tb:has(#p-ronaldo-nazario:checked) .n-p-ronaldo-nazario,
+.tb:has(#p-eusebio:checked) .n-p-eusebio,
+.tb:has(#p-thierry-henry:checked) .n-p-thierry-henry { display: inline; }
+
+.tb:has([name="gk"]:checked) .s-gk,
+.tb:has([name="lb"]:checked) .s-lb,
+.tb:has([name="lcb"]:checked) .s-lcb,
+.tb:has([name="rcb"]:checked) .s-rcb,
+.tb:has([name="rb"]:checked) .s-rb,
+.tb:has([name="cdm"]:checked) .s-cdm,
+.tb:has([name="lm"]:checked) .s-lm,
+.tb:has([name="rm"]:checked) .s-rm,
+.tb:has([name="cam"]:checked) .s-cam,
+.tb:has([name="lst"]:checked) .s-lst,
+.tb:has([name="rst"]:checked) .s-rst { --filled: 1; }
+
+.tb:has(#p-lev-yashin:checked) .r-gk,
+.tb:has(#p-roberto-carlos:checked) .r-lb,
+.tb:has(#p-paolo-maldini:checked) .r-lcb,
+.tb:has(#p-franco-baresi:checked) .r-rcb,
+.tb:has(#p-cafu:checked) .r-rb,
+.tb:has(#p-franz-beckenbauer:checked) .r-cdm,
+.tb:has(#p-lionel-messi:checked) .r-lm,
+.tb:has(#p-diego-maradona:checked) .r-rm,
+.tb:has(#p-zinedine-zidane:checked) .r-cam,
+.tb:has(#p-pele:checked) .r-lst,
+.tb:has(#p-ronaldo-nazario:checked) .r-rst { --match: 1; }
+
+/* All 11 picked: hide the hint, show the result */
+.tb:has([name="gk"]:checked):has([name="lb"]:checked):has([name="lcb"]:checked):has([name="rcb"]:checked):has([name="rb"]:checked):has([name="cdm"]:checked):has([name="lm"]:checked):has([name="rm"]:checked):has([name="cam"]:checked):has([name="lst"]:checked):has([name="rst"]:checked) .tb-hint { display: none; }
+.tb:has([name="gk"]:checked):has([name="lb"]:checked):has([name="lcb"]:checked):has([name="rcb"]:checked):has([name="rb"]:checked):has([name="cdm"]:checked):has([name="lm"]:checked):has([name="rm"]:checked):has([name="cam"]:checked):has([name="lst"]:checked):has([name="rst"]:checked) .tb-result { display: block; }
+
+.tb-head { margin-bottom: 22px; }
+.tb-head .era-title { margin-bottom: 6px; }
+.tb-lede { margin: 0; color: var(--muted); }
+
+.tb-body {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+/* Pitch */
+.tb-pitch {
+  position: sticky;
+  top: 104px;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 6px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background:
+    linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)) center / 100% 2px no-repeat,
+    radial-gradient(circle at 50% 50%, transparent 15%, rgba(255,255,255,0.35) 15.5%, transparent 16.5%),
+    repeating-linear-gradient(180deg, #1f7a3d 0 12.5%, #1b6c36 12.5% 25%);
+  overflow: hidden;
+}
+.tb-row { display: flex; justify-content: space-around; gap: 4px; }
+.tb-slot {
+  --filled: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  flex: 0 1 25%;
+  text-align: center;
+}
+.tb-slot-pos {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: background 260ms ease, border-color 260ms ease, transform 260ms cubic-bezier(.34,1.56,.64,1);
+}
+.tb-slot[class] .tb-slot-pos { /* filled look, switched on by --filled */
+  border-style: solid;
+  border-color: rgba(255, 255, 255, calc(0.6 + 0.4 * var(--filled)));
+  background: linear-gradient(120deg,
+    color-mix(in oklab, var(--accent) calc(var(--filled) * 100%), transparent),
+    color-mix(in oklab, var(--accent-2) calc(var(--filled) * 100%), transparent));
+  transform: scale(calc(1 + 0.08 * var(--filled)));
+}
+.tb-slot-name {
+  min-height: 1.2em;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Picker */
+.tb-picker { display: grid; gap: 10px; }
+.tb-pick {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.tb-pick-pos {
+  float: left;            /* lets the legend sit in the grid like a normal cell */
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.tb-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Radios stay in the page (so they count and take keyboard focus) but are invisible */
+.tb-in {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.tb-in:checked { counter-increment: tb-picked; }
+.tb-opt {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+.tb-opt:hover { border-color: color-mix(in oklab, var(--accent) 60%, transparent); transform: translateY(-2px); }
+.tb-in:checked + .tb-opt {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+}
+.tb-in:focus-visible + .tb-opt { outline: 2px solid var(--accent-3); outline-offset: 2px; }
+
+/* Actions */
+.tb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.tb-actions .btn { font: inherit; font-weight: 700; cursor: pointer; }
+html:not(.js) #tb-random { display: none; }   /* random needs JavaScript */
+.tb-count { color: var(--muted); font-family: var(--font-mono); font-size: 0.85rem; }
+.tb-count::before { content: counter(tb-picked) "/11 picked"; }
+.tb-hint { margin: 14px 0 0; color: var(--muted); }
+
+/* Result (shown by the all-11 rule above) */
+.tb-result {
+  display: none;
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.tb-scores { display: flex; flex-wrap: wrap; gap: 16px; }
+.tb-score {
+  flex: 1 1 160px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.tb-score.is-you {
+  border-color: color-mix(in oklab, var(--accent) 60%, transparent);
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+}
+.tb-score-label {
+  display: block;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tb-score-num {
+  font-family: var(--font-disp);
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.tb-score-num small { font-size: 1rem; color: var(--muted); font-weight: 700; margin-left: 2px; }
+.tb-you::before   { counter-reset: tb-s var(--tb-score);   content: counter(tb-s); }
+.tb-diff::before  { counter-reset: tb-d var(--tb-adiff);   content: counter(tb-d); }
+.tb-matches::before { counter-reset: tb-m var(--tb-matches); content: counter(tb-m); }
+
+/* Verdict: all three lines share one spot; only the true one is visible */
+.tb-verdict {
+  display: grid;
+  margin: 16px 0 4px;
+  font-family: var(--font-disp);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.tb-verdict .v { grid-area: 1 / 1; }
+.v-win  { opacity: clamp(0, var(--tb-diff), 1); }
+.v-lose { opacity: clamp(0, calc(-1 * var(--tb-diff)), 1); }
+.v-draw { opacity: calc(1 - clamp(0, var(--tb-adiff), 1)); }
+.tb-same { margin: 0 0 16px; color: var(--muted); }
+
+.tb-compare-wrap { overflow-x: auto; }
+.tb-compare { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.tb-compare th, .tb-compare td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+.tb-compare th { color: var(--muted); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.tb-c-pos { font-family: var(--font-mono); color: var(--accent); font-weight: 700; }
+.tb-compare tr { --match: 0; }
+.tb-compare tr td { background: color-mix(in oklab, var(--accent) calc(var(--match) * 12%), transparent); }
+
+@media (max-width: 860px) {
+  .tb { padding: 20px 16px; }
+  .tb-body { grid-template-columns: minmax(0, 1fr); }
+  .tb-pitch { position: static; max-width: 340px; width: 100%; margin: 0 auto; }
+}
 
 /* ---------- 6. Overlays -------------------------------------------- */
 

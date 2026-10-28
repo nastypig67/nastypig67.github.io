@@ -12,6 +12,7 @@
      9.  Photo lightbox
      10. Command palette + shortcut sheet + keyboard shortcuts
      11. Status bar
+     12. Team builder (Football Corner)
 
    No dependencies. Everything degrades to a plain stacked page if this
    file fails to load, and every effect is skipped under reduced motion.
@@ -685,6 +686,26 @@
 
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------- 12. Team builder -------------------------------------- */
+  /* The game itself is pure HTML + CSS (see index.html and the 5h block in
+     styles.css). This only powers the optional "Random XI" button. */
+
+  (function teamBuilder() {
+    var form = document.getElementById('team-builder');
+    var btn  = document.getElementById('tb-random');
+    if (!form || !btn) return;
+    btn.addEventListener('click', function () {
+      var groups = {};
+      Array.prototype.forEach.call(form.querySelectorAll('.tb-in'), function (input) {
+        (groups[input.name] = groups[input.name] || []).push(input);
+      });
+      Object.keys(groups).forEach(function (name) {
+        var list = groups[name];
+        list[Math.floor(Math.random() * list.length)].checked = true;
+      });
+    });
+  })();
 
   /* ---------- boot -------------------------------------------------- */
 
