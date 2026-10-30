@@ -61,7 +61,7 @@
       <a class="tab" href="#football">Football&nbsp;Corner</a>
       <a class="tab" href="#dog">My&nbsp;Dog</a>
       <a class="tab" href="#updates">Life&nbsp;Updates</a>
-      <a class="tab" href="#snake">Snake&nbsp;Game</a>
+      <a class="tab" href="#games">Games</a>
       <a class="tab" href="#contact">Contact</a>
       <span class="tab-glider" aria-hidden="true"></span>
     </nav>
@@ -723,32 +723,39 @@
 
 
 <!-- ==================================================================
-     SNAKE GAME — my pygame game, built for the browser with pygbag.
+     GAMES — games I've made. Add a new <article class="game"> for each one.
+     Rainbow Snake is my pygame game, built for the browser with pygbag.
      It lives in its own repo (snake-rainbow) and is published at
      eddiekong.com/snake-rainbow/ by GitHub Actions.
      ================================================================== -->
-<section id="snake" class="view" aria-labelledby="snake-title" hidden>
+<section id="games" class="view" aria-labelledby="games-title" hidden>
   <div class="section-head">
     <p class="eyebrow typed reveal" style="--i:0">07 — play a game</p>
-    <h2 id="snake-title" class="section-title reveal" style="--i:1">Rainbow <span class="grad scramble">snake</span></h2>
+    <h2 id="games-title" class="section-title reveal" style="--i:1">My <span class="grad scramble">games</span></h2>
     <p class="section-lede reveal" style="--i:2">
+      Games I've made. Click one to play it right here, or open it full screen.
+    </p>
+  </div>
+
+  <article class="game" aria-labelledby="snake-title">
+    <h3 id="snake-title" class="reveal" style="--i:3">Rainbow Snake</h3>
+    <p class="reveal" style="--i:3">
       A snake game I wrote in Python. Click the game first, then pick a difficulty with
       <kbd>1</kbd>–<kbd>9</kbd>. Steer with the arrow keys or WASD, <kbd>space</kbd> pauses,
       <kbd>r</kbd> restarts. Watch out for the grey blocks, and grab the rainbow apple.
     </p>
-  </div>
-
-  <figure class="dog-video panel reveal" style="--i:3">
-    <div class="video-frame game-frame">
-      <iframe
-        src="/snake-rainbow/"
-        title="Rainbow snake game"
-        loading="lazy"
-        allow="autoplay; fullscreen"
-        allowfullscreen></iframe>
-    </div>
-    <figcaption>Needs a keyboard. <a href="/snake-rainbow/" target="_blank" rel="noopener">Open it full screen ↗</a></figcaption>
-  </figure>
+    <figure class="dog-video panel reveal" style="--i:4">
+      <div class="video-frame game-frame">
+        <iframe
+          src="https://eddiekong.com/snake-rainbow/"
+          title="Rainbow Snake game"
+          loading="lazy"
+          allow="autoplay; fullscreen"
+          allowfullscreen></iframe>
+      </div>
+      <figcaption>Needs a keyboard. <a href="https://eddiekong.com/snake-rainbow/" target="_blank" rel="noopener">Open it full screen ↗</a></figcaption>
+    </figure>
+  </article>
 </section>
 
 
