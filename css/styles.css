@@ -770,6 +770,8 @@ html:not(.js) .boot { display: none; }
   width: min(600px, 100%, 62vh);
   margin-inline: auto;
 }
+/* The snake game is 1000×500, so its frame is 2:1. */
+.game-frame { aspect-ratio: 2 / 1; }
 .video-frame iframe {
   position: absolute;
   inset: 0;

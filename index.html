@@ -61,6 +61,7 @@
       <a class="tab" href="#football">Football&nbsp;Corner</a>
       <a class="tab" href="#dog">My&nbsp;Dog</a>
       <a class="tab" href="#updates">Life&nbsp;Updates</a>
+      <a class="tab" href="#snake">Snake&nbsp;Game</a>
       <a class="tab" href="#contact">Contact</a>
       <span class="tab-glider" aria-hidden="true"></span>
     </nav>
@@ -722,11 +723,41 @@
 
 
 <!-- ==================================================================
+     SNAKE GAME — my pygame game, built for the browser with pygbag.
+     It lives in its own repo (snake-rainbow) and is published at
+     eddiekong.com/snake-rainbow/ by GitHub Actions.
+     ================================================================== -->
+<section id="snake" class="view" aria-labelledby="snake-title" hidden>
+  <div class="section-head">
+    <p class="eyebrow typed reveal" style="--i:0">07 — play a game</p>
+    <h2 id="snake-title" class="section-title reveal" style="--i:1">Rainbow <span class="grad scramble">snake</span></h2>
+    <p class="section-lede reveal" style="--i:2">
+      A snake game I wrote in Python. Click the game first, then pick a difficulty with
+      <kbd>1</kbd>–<kbd>9</kbd>. Steer with the arrow keys or WASD, <kbd>space</kbd> pauses,
+      <kbd>r</kbd> restarts. Watch out for the grey blocks, and grab the rainbow apple.
+    </p>
+  </div>
+
+  <figure class="dog-video panel reveal" style="--i:3">
+    <div class="video-frame game-frame">
+      <iframe
+        src="/snake-rainbow/"
+        title="Rainbow snake game"
+        loading="lazy"
+        allow="autoplay; fullscreen"
+        allowfullscreen></iframe>
+    </div>
+    <figcaption>Needs a keyboard. <a href="/snake-rainbow/" target="_blank" rel="noopener">Open it full screen ↗</a></figcaption>
+  </figure>
+</section>
+
+
+<!-- ==================================================================
      CONTACT
      ================================================================== -->
 <section id="contact" class="view" aria-labelledby="contact-title" hidden>
   <div class="section-head">
-    <p class="eyebrow typed reveal" style="--i:0">07 — say hello</p>
+    <p class="eyebrow typed reveal" style="--i:0">08 — say hello</p>
     <h2 id="contact-title" class="section-title reveal" style="--i:1">Get in <span class="grad scramble">touch</span></h2>
     <p class="section-lede reveal" style="--i:2">
       Replace this with how you'd like people to reach you, and what you're happy to be contacted about.
@@ -806,7 +837,7 @@
     <h2 class="sheet-title" id="sheet-title">Keyboard shortcuts</h2>
     <ul class="sheet-list">
       <li><span>Command palette</span> <kbd>⌘K</kbd></li>
-      <li><span>Jump to section</span> <kbd>1</kbd>–<kbd>8</kbd></li>
+      <li><span>Jump to section</span> <kbd>1</kbd>–<kbd>9</kbd></li>
       <li><span>Next / previous tab</span> <kbd>→</kbd> <kbd>←</kbd></li>
       <li><span>Photo viewer: navigate</span> <kbd>→</kbd> <kbd>←</kbd></li>
       <li><span>Close anything</span> <kbd>esc</kbd></li>
