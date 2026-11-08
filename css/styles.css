@@ -473,11 +473,11 @@ html:not(.js) .boot { display: none; }
   from { transform: translateY(-14px); }
   to   { transform: translateY(16px);  }
 }
-.c1 { --d: 1.0; top:  0%;  left:  6%; width: 44%; rotate: -6deg; animation-duration: 11s; }
-.c2 { --d: 1.6; top: 10%;  left: 54%; width: 42%; rotate:  5deg; animation-duration: 13s; animation-delay: -3s; }
-.c3 { --d: 0.6; top: 46%;  left:  0%; width: 38%; rotate:  8deg; animation-duration: 15s; animation-delay: -6s; }
-.c4 { --d: 2.0; top: 60%;  left: 46%; width: 40%; rotate: -4deg; animation-duration: 10s; animation-delay: -2s; }
-.c5 { --d: 1.2; top: 30%;  left: 28%; width: 32%; rotate:  3deg; animation-duration: 14s; animation-delay: -8s; }
+.c1 { --d: 1.0; top: -4%;  left:  6%; width: 44%; rotate: -6deg; animation-duration: 11s; }
+.c2 { --d: 1.6; top:  4%;  left: 54%; width: 42%; rotate:  5deg; animation-duration: 13s; animation-delay: -3s; }
+.c3 { --d: 0.6; top: 36%;  left: 46%; width: 38%; rotate:  8deg; animation-duration: 15s; animation-delay: -6s; }
+.c4 { --d: 2.0; top: 50%;  left:  0%; width: 40%; rotate: -4deg; animation-duration: 10s; animation-delay: -2s; }
+.c5 { --d: 1.2; top: 22%;  left: 28%; width: 32%; rotate:  3deg; animation-duration: 14s; animation-delay: -8s; }
 
 .marquee {
   margin-top: 58px;
@@ -1564,7 +1564,7 @@ html:not(.js) #tb-random { display: none; }   /* random needs JavaScript */
     min-height: 0;
     padding-top: 8px;
   }
-  .collage { order: -1; aspect-ratio: 4 / 3; max-width: 460px; margin: 0 auto; width: 100%; }
+  .collage { order: -1; aspect-ratio: 4 / 3; max-width: 460px; margin: 0 auto 28px; width: 100%; }
   main { padding: 34px 16px 64px; }
   .take { flex-direction: column; gap: 6px; }
   .sb-hide { display: none; }
